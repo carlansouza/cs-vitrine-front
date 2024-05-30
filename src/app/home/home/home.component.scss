@@ -1,0 +1,28 @@
+.cadastro{
+    margin-top: 80px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.maquina-escrever{
+    font-family: 'Courier New', Courier, monospace;
+    border-right: 4px solid orange;
+    width: 58ch;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 6.7s infinite normal;
+}
+
+.justo{
+    text-align: justify;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { border-right-color: transparent;}
+}
+

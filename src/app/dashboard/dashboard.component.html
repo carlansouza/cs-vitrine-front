@@ -1,0 +1,81 @@
+<div class="container mt-5 mb-5">
+  <div>
+    <h1 class="text-center">Painel de Controle</h1>
+  </div>
+  <!-- CRUD CARROS -->
+  <div>
+    <!-- CRUD operations go here -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Meus Veiculos</h3>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <div class="">
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="mb-3 col-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="carro.nome">
+                  </div>
+                  <div class="mb-3 col-6">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="carro.marca">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3 col-6">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo" [(ngModel)]="carro.modelo">
+                  </div>
+                  <div class="mb-3 col-6">
+                    <label for="preco" class="form-label">Preço</label>
+                    <input type="text" class="form-control" id="preco" name="preco" [(ngModel)]="carro.preco">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3 col-6">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao" [(ngModel)]="carro.d_alt"></textarea>
+                  </div>
+                  <div class="mb-3 col-6">
+                    <label for="imagem" class="form-label">Imagem</label>
+                    <input type="file" class="form-control" id="imagem" name="imagem" [(ngModel)]="carro.imagem">
+                  </div>
+                  <button class="btn btn-success" (click)="buttonClick()">Adicionar Carro</button>
+                </div>
+              </form>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Preço</th>
+              <th>Descrição</th>
+              <th>Imagem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let carro of carros$ | order: 'id'">
+              <td>{{carro.id}}</td>
+              <td>{{carro.nome}}</td>
+              <td>{{carro.marca}}</td>
+              <td>{{carro.modelo}}</td>
+              <td>{{carro.preco}}</td>
+              <td>{{carro.d_alt}}</td>
+              <td>imagem</td>
+              <td class="d-flex justify-content-around">
+                <button class="btn btn-primary btn-sm" (click)="preencherFormulario(carro)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deletarCarro(carro.id)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

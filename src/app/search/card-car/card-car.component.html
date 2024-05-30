@@ -1,0 +1,21 @@
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-5 mb-5">
+  <div class="col" *ngFor="let carro of carro$ | order: 'preco'">
+    <div class="card h-100">
+      <img [src]="carro.imagem" class="card-img-top" alt="{{carro.d_alt}}">
+      <div class="card-body row text-center">
+        <div class="col-6">
+          <p class="card-text ajuste"> {{carro.nome}}</p>
+          <p class="card-text"> {{carro.marca}}</p>
+        </div>
+        <div class="col-6">
+          <p class="card-text">{{carro.modelo}}</p>
+          <p class="card-text" >{{carro.preco}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

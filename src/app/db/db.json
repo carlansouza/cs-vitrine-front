@@ -1,0 +1,76 @@
+{
+  "carros": [
+    {
+      "id": "3",
+      "nome": "Uno",
+      "marca": "Fiat",
+      "modelo": "2015",
+      "preco": "30000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Uno 2015"
+    },
+    {
+      "id": "4",
+      "nome": "Celta",
+      "marca": "Chevrolet",
+      "modelo": "2012",
+      "preco": "25000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Celta 2012"
+    },
+    {
+      "id": "5",
+      "nome": "Corsa",
+      "marca": "Chevrolet",
+      "modelo": "2008",
+      "preco": "15000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Corsa 2008"
+    },
+    {
+      "id": "6",
+      "nome": "Palio",
+      "marca": "Fiat",
+      "modelo": "2013",
+      "preco": "28000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Palio 2013"
+    },
+    {
+      "id": "7",
+      "nome": "Civic",
+      "marca": "Honda",
+      "modelo": "2015",
+      "preco": "50000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Civic 2015"
+    },
+    {
+      "id": "8",
+      "nome": "Corolla",
+      "marca": "Toyota",
+      "modelo": "2014",
+      "preco": "45000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Corolla 2014"
+    },
+    {
+      "id": "9",
+      "nome": "Sandero",
+      "marca": "Renault",
+      "modelo": "2016",
+      "preco": "35000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um Sandero 2016"
+    },
+    {
+      "id": "11",
+      "nome": "HB20",
+      "marca": "Hyundai",
+      "modelo": "2018",
+      "preco": "38000",
+      "imagem": "./assets/vitrine-car.jpg",
+      "d_alt": "Imagem de um HB20 2018"
+    }
+  ]
+}

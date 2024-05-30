@@ -1,0 +1,51 @@
+<div class="grid">
+  <div class="row">
+    <div class="d-flex justify-content-center col-12 ">
+      <div class="card" *ngIf="loginCard">
+        <div class="card-body text-center">
+          <h1 class="card-title">Login</h1>
+          <h5>Bem vindo a nossa agencia de carros.</h5>
+          <p>Entre com sua conta para ter acesso a todos os nossos veículos.</p>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+            <div class="mb-3 text-start">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite seu email">
+            </div>
+            <div class="mb-3 text-start">
+              <label for="senha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="onClickSignUp()">Entrar</button>
+            <!-- <button type="submit" class="btn btn-primary" [disabled]="!this.loginForm.valid">Entrar</button> -->
+          </form>
+          <p class="mt-3">Não tem uma conta? <a (click)="loginCard = !loginCard">Cadastre-se</a></p>
+        </div>
+      </div>
+
+      <div class="card" *ngIf="!loginCard">
+        <div class="card-body text-center">
+          <h1 class="card-title">Cadastra-se</h1>
+          <p>Crie sua conta no CS Vitrine gratuitamente.</p>
+          <form [formGroup]="signUpForm" (ngSubmit)="onSubmitSignUP()">
+            <div class="mb-3 text-start">
+              <label for="name" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Digite seu nome">
+            </div>
+
+            <div class="mb-3 text-start">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite seu email">
+            </div>
+
+            <div class="mb-3 text-start">
+              <label for="senha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!this.signUpForm.valid">Cadastrar</button>
+          </form>
+          <p class="mt-3">Já tem uma conta? <a (click)="loginCard = !loginCard">Entrar</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
