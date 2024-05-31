@@ -1,10 +1,10 @@
 export interface Car {
   id: number;
-  nome: string;
-  marca: string;
-  modelo: string;
-  preco: number;
-  imagem: string;
+  name: string;
+  brand: string;
+  model: string;
+  price: number;
+  image: string;
   d_alt: string;
 }
 

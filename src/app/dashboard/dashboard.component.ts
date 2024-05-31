@@ -13,15 +13,15 @@ export class DashboardComponent {
 
   carros$: any[] = [];
 
-  url = `${environment.api}/carros`;
+  url = `${environment.api}/cars`;
 
   carro: Car = {
     id: 0,
-    nome: '',
-    marca: '',
-    modelo: '',
-    preco: 0,
-    imagem: '',
+    name: '',
+    brand: '',
+    model: '',
+    price: 0,
+    image: '',
     d_alt: ''
   };
 
@@ -33,6 +33,7 @@ export class DashboardComponent {
   ngOnInit(): void {
     this.carService.obterCarros().subscribe((carros) => {
       this.carros$ = carros;
+      console.log(this.carros$);
     });
 
   }
@@ -57,8 +58,8 @@ export class DashboardComponent {
   }
 
   buttonClick(){
-    if (!this.carro.nome || !this.carro.marca || !this.carro.modelo ||
-        !this.carro.    preco || !this.carro.d_alt) {
+    if (!this.carro.name || !this.carro.brand || !this.carro.model ||
+        !this.carro.price || !this.carro.d_alt) {
       console.log('Preencha todos os campos!');
       return;
     }
@@ -86,11 +87,11 @@ export class DashboardComponent {
   limparFormulario() {
     this.carro = {
       id: 0,
-      nome: '',
-      marca: '',
-      modelo: '',
-      preco: 0,
-      imagem: '',
+      name: '',
+      brand: '',
+      model: '',
+      price: 0,
+      image: '',
       d_alt: ''
     };
   }

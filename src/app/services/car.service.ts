@@ -9,13 +9,13 @@ import { Car } from "../models/car.model";
 
 export class CarService {
 
-  private url = `${environment.api}/carros`;
+  private url = `${environment.api}/cars`;
 
   constructor(private httpClient: HttpClient) {
   }
 
   obterCarros() {
-    return this.httpClient.get<Car[]>(this.url);
+    return this.httpClient.get<any>(this.url);
   }
 
   cadastrarCarro(car: Car) {
