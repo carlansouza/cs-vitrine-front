@@ -1,6 +1,9 @@
-import { session } from './../../utils/session';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { UserLogin, UserCreate } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,36 +12,52 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  user$: any[] = [];
+  url = `${environment.api}/users`;
+
   loginCard = true;
 
-  loginForm = this.formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  });
-
-  signUpForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required]
-  });
+  loginForm: FormGroup;
+  signUpForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private httpClient: HttpClient,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      hashed_password: ['', Validators.required]
+    });
 
-  ngOnInit(): void {
+    this.signUpForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      hashed_password: ['', Validators.required],
+      role: ['', Validators.required]
+    });
   }
 
-  onSubmitLogin(): void {
-    console.log(this.loginForm.value);
+  ngOnInit(): void { }
+
+  createUser(user: UserCreate) {
+    return this.httpClient.post<UserLogin>(this.url, user);
   }
 
-  onSubmitSignUP(): void {
-    console.log(this.signUpForm.value);
-  }
+  onSignUp(): void {
+    if (this.signUpForm.valid) {
+      const formData = this.signUpForm.value;  // Use signUpForm para obter os dados de cadastro
+      console.log('Form Data: ', formData);
 
-  onClickSignUp(): void {
-    session.session$ = true;
+      this.httpClient.post<UserLogin>(this.url, formData).subscribe({
+        next: () => {
+          this.router.navigate(['user']);
+          return void 0; // Explicitly return void
+        },
+        error: error => console.error('There was an error!', error)
+      });
+    } else {
+      alert('Preencha todos os campos corretamente!');
+    }
   }
-
 }

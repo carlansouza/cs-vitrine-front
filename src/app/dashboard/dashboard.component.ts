@@ -25,6 +25,8 @@ export class DashboardComponent {
     d_alt: ''
   };
 
+  defaultImage = 'assets/carro-produção.jpg';
+
   constructor(
     private carService: CarService,
     private httpClient: HttpClient
@@ -59,8 +61,8 @@ export class DashboardComponent {
 
   buttonClick(){
     if (!this.carro.name || !this.carro.brand || !this.carro.model ||
-        !this.carro.price || !this.carro.d_alt) {
-      console.log('Preencha todos os campos!');
+        !this.carro.price) {
+      alert('Preencha os campos' + (this.carro.name ? '' : ' Nome,') + (this.carro.brand ? '' : ' Narca,') + (this.carro.model ? '' : ' Modelo,') + (this.carro.price ? '' : ' e Preço') + ' corretamente!');
       return;
     }
 
@@ -70,7 +72,12 @@ export class DashboardComponent {
       return;
     }
 
-    this.incrementarId();
+    if (!this.carro.image) {
+      this.carro.image = this.defaultImage;
+      this.carro.d_alt = "Imagem de um carro em produção!"
+    } else {
+      this.carro.d_alt = "Imagem de um " + this.carro.name + " " + this.carro.model
+    }
 
     this.carService.cadastrarCarro(this.carro).subscribe(_ => this.obterCarros());
     window.location.reload();
@@ -95,10 +102,5 @@ export class DashboardComponent {
       d_alt: ''
     };
   }
-
-  incrementarId() {
-    this.carro.id = this.carros$.length + 1;
-  }
-
 
 }

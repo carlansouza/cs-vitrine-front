@@ -17,11 +17,16 @@
                 <div class="row">
                   <div class="mb-3 col-6">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="carro.name">
+                    <input type="text"
+                           class="form-control"
+                           id="nome"
+                           name="nome"
+                           [(ngModel)]="carro.name">
                   </div>
                   <div class="mb-3 col-6">
                     <label for="marca" class="form-label">Marca</label>
-                    <input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="carro.brand">
+                    <input type="text"
+                           class="form-control" id="marca" name="marca" [(ngModel)]="carro.brand">
                   </div>
                 </div>
                 <div class="row">
@@ -35,15 +40,17 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="mb-3 col-6">
-                    <label for="descricao" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="descricao" name="descricao" [(ngModel)]="carro.d_alt"></textarea>
+                  <div class="mb-3 col-12">
+                    <label for="image" class="form-label">URL Imagem</label>
+                    <input type="text"
+                           class="form-control"
+                           id="image"
+                           name="image"
+                           [(ngModel)]="carro.image">
                   </div>
-                  <div class="mb-3 col-6">
-                    <label for="imagem" class="form-label">Imagem</label>
-                    <input type="file" class="form-control" id="imagem" name="imagem" [(ngModel)]="carro.image">
-                  </div>
-                  <button class="btn btn-success" (click)="buttonClick()">Adicionar Carro</button>
+                  <button class="btn btn-success" (click)="buttonClick()">
+                    Adicionar Carro
+                  </button>
                 </div>
               </form>
           </div>
@@ -63,12 +70,12 @@
           <tbody>
             <tr *ngFor="let carro of carros$ | order: 'id'">
               <td>{{carro.id}}</td>
-              <td>{{carro.nome}}</td>
-              <td>{{carro.marca}}</td>
-              <td>{{carro.modelo}}</td>
-              <td>{{carro.preco}}</td>
+              <td>{{carro.name}}</td>
+              <td>{{carro.brand}}</td>
+              <td>{{carro.model}}</td>
+              <td>{{carro.price}}</td>
               <td>{{carro.d_alt}}</td>
-              <td>imagem</td>
+              <td class="td-limitado">{{carro.image}}</td>
               <td class="d-flex justify-content-around">
                 <button class="btn btn-primary btn-sm" (click)="preencherFormulario(carro)">Editar</button>
                 <button class="btn btn-danger btn-sm" (click)="deletarCarro(carro.id)">Deletar</button>
