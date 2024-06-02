@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       hashed_password: ['', Validators.required],
-      role: ['', Validators.required]
     });
   }
 
@@ -47,11 +46,9 @@ export class LoginComponent implements OnInit {
   onSignUp(): void {
     if (this.signUpForm.valid) {
       const formData = this.signUpForm.value;  // Use signUpForm para obter os dados de cadastro
-      console.log('Form Data: ', formData);
-
-      this.httpClient.post<UserLogin>(this.url, formData).subscribe({
+      this.httpClient.post<UserCreate>(this.url, formData).subscribe({
         next: () => {
-          this.router.navigate(['user']);
+          this.router.navigate(['/users']);
           return void 0; // Explicitly return void
         },
         error: error => console.error('There was an error!', error)
