@@ -46,9 +46,7 @@ export class DashboardComponent {
 
   deletarCarro(id: number) {
     this.carService.deletarCarro(id).subscribe(_ => this.obterCarros());
-    //console.log('Carro deletado com sucesso!');
     window.location.reload();
-
   }
 
   atualizarCarro(car: Car) {
