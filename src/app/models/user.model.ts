@@ -4,7 +4,6 @@ export interface User{
   email: string;
   hashed_password: string;
   role: string;
-  // role: string;
 }
 
 export type UserCreate = Omit<User, 'id' | 'role' >;

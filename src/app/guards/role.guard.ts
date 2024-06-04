@@ -12,14 +12,14 @@ export class RoleGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    const expectedRoles = next.data['roles']; // Obtém os papéis esperados da rota
-    const userRole = this.authService.getUserRole(); // Supondo que esta função retorna o papel do usuário atual
+    const expectedRoles = next.data['roles'];
+    const userRole = this.authService.getUserRole();
 
-    // Verifica se o papel do usuário está na lista de papéis esperados
+
     if (expectedRoles.includes(userRole)) {
       return true;
     } else {
-      this.router.navigate(['/unauthorized']); // Redireciona para uma página de "não autorizado" se o papel não corresponder
+      this.router.navigate(['/unauthorized']); 
       return false;
     }
   }

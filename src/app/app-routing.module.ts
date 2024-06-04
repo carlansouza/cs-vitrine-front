@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SearchComponent } from './search/search/search.component';
 import { LoginComponent } from './login/login/login.component';
 import { HomeComponent } from './home/home/home.component';
-// import { authGuard } from './_guard/autorizado.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
