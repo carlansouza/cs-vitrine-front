@@ -7,7 +7,7 @@
           <h5>Bem vindo a nossa agencia de carros.</h5>
           <p>Entre com sua conta para ter acesso a todos os nossos veículos.</p>
           <form [formGroup]="loginForm"
-                (ngSubmit) = "onSingIn()">
+                (ngSubmit) = "onSignIn()">
             <div class="mb-3 text-start">
               <label for="email" class="form-label">Email</label>
               <input type="email"
@@ -21,13 +21,14 @@
               <label for="hashed_password" class="form-label">Senha</label>
               <input type="password"
                      class="form-control"
-                     formControlName="hashed_password"
+                     formControlName="password"
                      name="hashed_password"
                      id="hashed_password"
                      placeholder="Digite sua senha">
             </div>
             <button type="submit"
-                    class="btn btn-primary">
+                    class="btn btn-primary"
+                    >
                     Entrar
             </button>
           </form>

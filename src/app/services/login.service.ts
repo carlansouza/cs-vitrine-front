@@ -22,4 +22,8 @@ export class LoginService {
     return this.httpClient.post<UserCreate>(this.url, user);
   }
 
+  getRole() {
+    return localStorage.getItem('role');
+  }
+
 }

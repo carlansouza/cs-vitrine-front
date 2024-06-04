@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserLogin, UserCreate } from 'src/app/models/user.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -14,9 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  user$: any[] = [];
+
+  returnUrl: string = '';
+
   urlCreate = `${environment.api}/users`;
-  urlLogin = `${environment.api}/users/login`;
+  urlLogin = `${environment.api}/users/auth/login`;
 
   loginButton = true;
 
@@ -27,11 +29,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private httpClient: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      hashed_password: ['', Validators.required]
+      password: ['', Validators.required],
     });
 
     this.signUpForm = this.fb.group({
@@ -42,7 +45,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
+    this.route.data.subscribe(data => {
+      console.log('Dados da rota:', data);
+    });
   }
 
   createUser(user: UserCreate) {
@@ -55,7 +62,7 @@ export class LoginComponent implements OnInit {
       this.httpClient.post<UserCreate>(this.urlCreate, formData).subscribe({
         next: () => {
           this.successSignUp();
-          this.router.navigate(['/users']);
+          this.router.navigate(['/users/auth/login']);
           return void 0;
         },
         error: error => console.error('There was an error!', error)
@@ -65,35 +72,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSingIn(): void {
+  onSignIn(): void {
+    console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      this.httpClient.post<UserLogin>(this.urlLogin, formData).subscribe({
-        next: () => {
-          this.authService.login(formData).subscribe(
-            data => this.authService.setToken(data.token)
-          );
+      this.authService.login(formData).subscribe({
+        next: (response) => {
           this.successLogin();
-          this.router.navigate(['/search']);
-          return void 0;
+          this.authService.setToken(response.token);
+          this.router.navigateByUrl(this.returnUrl);
         },
-        error: error => console.error('There was an error!', error)
+        error: (error) => {
+          console.error('There was an error!', error);
+        }
       });
     }
   }
-
-  // onSingIn(): void {
-  //   if (this.loginForm.valid) {
-  //     const formData = this.loginForm.value;
-  //     this.authService.login(formData).subscribe({
-  //       next: () => {
-  //         this.successLogin();
-  //         this.router.navigate(['/search']);
-  //       },
-  //       error: error => console.error('There was an error!', error)
-  //     });
-  //   }
-  // }
 
   successLogin(): void {
     alert('Login efetuado com sucesso!');

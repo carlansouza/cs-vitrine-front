@@ -13,13 +13,16 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const token = this.authService.getToken();
-    if (token) {
-      // Se houver um token, permita o acesso à rota solicitada
+    const expectedRole = next.data['role'] as string;
+    const userRole = this.authService.getUserRole();
+    console.log('userRole: ', userRole);
+
+    if (userRole === expectedRole) {
       return true;
     } else {
-      // Se não houver token, redirecionar o usuário para a tela de login e salvar a rota de destino
-      return this.router.createUrlTree(['/users/login'], { queryParams: { returnUrl: state.url } });
+      // Redirecionar se o usuário não tiver a role necessária
+      this.router.navigate(['/unauthorized']);
+      return false;
     }
   }
 }
