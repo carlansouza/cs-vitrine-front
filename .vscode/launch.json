@@ -7,7 +7,7 @@
       "type": "pwa-chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "https://cs-vitrine-back-445greuix-carlas-projects-420903b3.vercel.app"
     },
     {
       "name": "ng test",

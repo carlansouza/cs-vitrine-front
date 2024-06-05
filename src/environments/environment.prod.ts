@@ -1,4 +1,4 @@
 export const environment = {
-  api: '',
+  api: 'https://teste-vitrine.netlify.app',
 
 };
