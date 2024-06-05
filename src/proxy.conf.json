@@ -3,7 +3,10 @@
       "target": "https://cs-vitrine-back.vercel.app",
       "secure": false,
       "changeOrigin": true,
-      "logLevel": "debug"
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/api": ""
+      }
     }
-  }
+}
   
