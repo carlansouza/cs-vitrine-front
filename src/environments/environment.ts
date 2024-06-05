@@ -1,4 +1,5 @@
 export const environment = {
-  api: '',
+  production: true,
+  api: 'https://cs-vitrine-back.vercel.app',
 
 };

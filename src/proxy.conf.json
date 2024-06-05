@@ -1,0 +1,7 @@
+{
+    "/*":{
+        "target": "https://cs-vitrine-back.vercel.app",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
