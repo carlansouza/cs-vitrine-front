@@ -23,10 +23,6 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'users',
-    component: LoginComponent
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard], data: { role: 'admin' }

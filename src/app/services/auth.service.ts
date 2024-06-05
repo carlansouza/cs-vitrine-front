@@ -10,6 +10,8 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
 
+  private loggedIn = false;
+
   private url = `${environment.api}/users/auth`;
 
 
@@ -44,8 +46,19 @@ export class AuthService {
 
   }
 
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
+  isLogin(): void {
+    this.loggedIn = true;
+  }
+
   logout(): void {
+    this.loggedIn = false;
     localStorage.removeItem('token');
   }
+
+
 
 }

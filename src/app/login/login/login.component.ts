@@ -47,9 +47,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    this.route.data.subscribe(data => {
-      console.log('Dados da rota:', data);
-    });
+    this.route.data.subscribe(data => {});
   }
 
   createUser(user: UserCreate) {
@@ -91,6 +89,8 @@ export class LoginComponent implements OnInit {
 
   successLogin(): void {
     alert('Login efetuado com sucesso!');
+    this.authService.isLogin();
+
   }
 
   successSignUp(): void {
