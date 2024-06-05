@@ -1,4 +1,4 @@
 export const environment = {
-  api: 'https://teste-vitrine.netlify.app',
+  api: 'https://cs-vitrine-back.vercel.app',
 
 };
