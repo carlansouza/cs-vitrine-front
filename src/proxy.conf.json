@@ -2,7 +2,7 @@
     "proxyConfig": [
       {
         "context": [
-          "/api"
+          "/"
         ],
         "target": "https://cs-vitrine-back.vercel.app",
         "secure": false,
