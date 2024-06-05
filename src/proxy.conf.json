@@ -1,7 +1,9 @@
 {
-    "/*":{
-        "target": "https://cs-vitrine-back.vercel.app",
-        "secure": false,
-        "logLevel": "debug"
+    "/api": {
+      "target": "https://cs-vitrine-back.vercel.app",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
-}
+  }
+  
