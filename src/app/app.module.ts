@@ -10,10 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search/search.component';
 import { HomeComponent } from './home/home/home.component';
 import { CardCarComponent } from './search/card-car/card-car.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrderPipe } from './pipe/order.pipe';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { CustomHttpInterceptor } from './utils/interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
