@@ -1,12 +1,15 @@
 {
-    "/api": {
-      "target": "https://cs-vitrine-back.vercel.app",
-      "secure": false,
-      "changeOrigin": true,
-      "logLevel": "debug",
-      "pathRewrite": {
-        "^/api": ""
+    "proxyConfig": [
+      {
+        "context": [
+          "/api"
+        ],
+        "target": "https://cs-vitrine-back.vercel.app",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+          "^/": ""
+        }
       }
-    }
-}
-  
+    ]
+  }

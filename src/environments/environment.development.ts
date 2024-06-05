@@ -1,4 +1,4 @@
 export const environment = {
   prodution: false,
-  api:  'http://localhost:8000'
+  api:  'https://cs-vitrine-back.vercel.app'
 };
