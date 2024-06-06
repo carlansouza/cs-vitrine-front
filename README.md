@@ -1,27 +1,44 @@
-# Cscar
+# CS VITRINE - Frontend
+## PROJETO 
+```markdown
+     Desenvolvido para teste de seleção, com o objetivo de criar uma vitrine de venda de carros.
+```
+##
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
+### Funcionalidades
+- Cadastro de usuários
+- Cadastro de carros
+- Listagem de carros
+- Edição de carros
+- Exclusão de carros
 
-## Development server
+##
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ ### Usuários iniciais
 
-## Code scaffolding
+| User: admin@admin.com | Password: admin | Tipo: Admin |
+|-----------------------|------------------|-------------|
+| User: user@example.com | Password: password1| Tipo: User |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Tecnologias utilizadas no Frontend
+- Angular 
+- Angular Material
+- Bootstrap
 
-## Build
+##
+## Frontend
+Dentro do diretório, execute os seguintes comandos:
+```bash
+npm install
+npm ng s -o
+```
+### Observações:
+- O frontend está rodando na porta 4200.
+- O backend está rodando na porta 8000.
+- Necessário rodar o backend para que o frontend funcione corretamente.
+- O backend está disponível em: [CS VITRINE - Backend]( https://github.com/carlansouza/cs-vitrine-back)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Contact
 
-## Running unit tests
+Para mais informações, entre em contato comigo através do email: [Carla Sousa](mailto:carlanogueirasouza@gmail.com)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
