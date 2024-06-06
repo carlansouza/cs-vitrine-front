@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
       const formData = this.signUpForm.value;
       this.httpClient.post<UserCreate>(this.urlCreate, formData).subscribe({
         next: () => {
-          this.authService.isLogin();
           this.successSignUp();
           this.router.navigate(['/users/auth/login']);
           return void 0;
@@ -81,7 +80,6 @@ export class LoginComponent implements OnInit {
           this.successLogin();
           this.authService.setToken(response.token);
           this.router.navigateByUrl(this.returnUrl);
-          this.authService.isLogin();
         },
         error: (error) => {
           console.error('There was an error!', error);
@@ -94,7 +92,6 @@ export class LoginComponent implements OnInit {
 
   successLogin(): void {
     this.openSnackBar('Login efetuado com sucesso!');
-    this.authService.isLoggedIn();
   }
 
   failedLogin(): void {

@@ -12,20 +12,22 @@ import { ConfirmDialogComponent } from 'src/app/utils/confirm-dialog/confirm-dia
 })
 export class NavBarComponent implements OnInit {
 
-  private buttonLogin = false;
+  isLoggedIn = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
-  ) { }
+
+
+  ) {
+    this.authService.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+   }
 
   ngOnInit(): void {
-  }
-
-  isLogged(): boolean {
-    return this.authService.isLoggedIn();
   }
 
 

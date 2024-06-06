@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { jwtDecode } from 'jwt-decode';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -10,15 +11,21 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
 
-  private loggedIn = false;
-
   private url = `${environment.api}/users/auth`;
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
+  isLoggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string, password: string }): Observable<any> {
-    return this.http.post<any>(this.url + '/login', credentials);
+    return this.http.post<any>(this.url + '/login', credentials).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          this.loggedIn.next(true);
+        }
+      })
+    )
   }
 
   getToken(): string | null {
@@ -45,16 +52,12 @@ export class AuthService {
     return decodedToken ? decodedToken.role : null;
   }
 
-  isLoggedIn(): boolean {
-    return this.loggedIn;
-  }
-
-  isLogin(): void {
-    this.loggedIn = true;
+  isUserLoggedIn(): boolean {
+    return this.loggedIn.value;
   }
 
   isLogout(): void {
-    this.loggedIn = false;
+    this.loggedIn.next(false);
     localStorage.removeItem('token');
   }
 }
