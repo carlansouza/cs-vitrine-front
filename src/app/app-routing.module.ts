@@ -9,14 +9,17 @@ import { RoleGuard } from './guards/role.guard';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
-  {path: '', pathMatch:'full', redirectTo: 'home'},
+  { path: '',
+    pathMatch:'full',
+    redirectTo: 'home'
+  },
   { path: 'home',
     component: HomeComponent
   },
   {
     path: 'search',
     component: SearchComponent,
-    canActivate: [RoleGuard], data: { roles: ['admin', 'user'] }
+    // canActivate: [RoleGuard], data: { roles: ['admin', 'user'] }
   },
   {
     path: 'auth/login',
@@ -30,7 +33,6 @@ const routes: Routes = [
   {
     path: 'unauthorized',
     component: UnauthorizedComponent
-
   }
 ];
 

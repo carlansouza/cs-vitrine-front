@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { UserLogin, UserCreate } from 'src/app/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
     private httpClient: HttpClient,
     private router: Router,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -59,6 +61,7 @@ export class LoginComponent implements OnInit {
       const formData = this.signUpForm.value;
       this.httpClient.post<UserCreate>(this.urlCreate, formData).subscribe({
         next: () => {
+          this.authService.isLogin();
           this.successSignUp();
           this.router.navigate(['/users/auth/login']);
           return void 0;
@@ -66,12 +69,11 @@ export class LoginComponent implements OnInit {
         error: error => console.error('There was an error!', error)
       });
     } else {
-      alert('Preencha todos os campos corretamente!');
+      this.snackBar.open('Preencha todos os campos corretamente!');
     }
   }
 
   onSignIn(): void {
-    console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
       this.authService.login(formData).subscribe({
@@ -79,27 +81,37 @@ export class LoginComponent implements OnInit {
           this.successLogin();
           this.authService.setToken(response.token);
           this.router.navigateByUrl(this.returnUrl);
+          this.authService.isLogin();
         },
         error: (error) => {
           console.error('There was an error!', error);
         }
       });
-    }
+     } else {
+      this.failedLogin();
+     }
   }
 
   successLogin(): void {
-    alert('Login efetuado com sucesso!');
-    this.authService.isLogin();
+    this.openSnackBar('Login efetuado com sucesso!');
+    this.authService.isLoggedIn();
+  }
 
+  failedLogin(): void {
+    this.openSnackBar('Usuário ou senha incorretos!');
   }
 
   successSignUp(): void {
-    alert('Cadastro efetuado com sucesso!');
+    this.openSnackBar('Cadastro efetuado com sucesso!');
     window.location.reload();
   }
 
-  loggout(): void {
-    this.authService.logout();
-    this.router.navigate(['/users/login']);
+  private openSnackBar(message: string): void {
+    this.snackBar.open(message, 'Fechar', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
   }
+
 }

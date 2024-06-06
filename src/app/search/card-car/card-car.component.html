@@ -1,16 +1,22 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 mt-5 mb-5">
   <div class="col" *ngFor="let carro of carro$ | order: 'price'">
-    <div class="card h-100">
+    <div class="card h-100 shadow-sm border-0">
       <img [src]="carro.image" class="card-img-top" alt="{{carro.d_alt}}">
       <div class="card-body row text-center">
         <div class="col-6">
-          <p class="card-text ajuste"> {{carro.name}}</p>
-          <p class="card-text"> {{carro.brand}}</p>
+          <p class="card-text ajuste font-weight-bold"> {{carro.name}}</p>
+          <p class="card-text text-muted"> {{carro.brand}}</p>
         </div>
         <div class="col-6">
           <p class="card-text">{{carro.model}}</p>
-          <p class="card-text" >{{carro.price}}</p>
+          <p class="card-text text-success font-weight-bold"
+
+          >R$ {{carro.price}}</p>
         </div>
+      </div>
+      <div class="d-flex justify-content-around mb-2">
+        <button class="btn btn-success btn-sm">Comprar</button>
+        <a class="btn btn-info btn-sm">Ver Detalhes</a>
       </div>
     </div>
   </div>

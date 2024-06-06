@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-unauthorized',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./unauthorized.component.scss']
 })
 export class UnauthorizedComponent {
+
+  constructor(
+    private authService: AuthService,
+  ) { }
 
 }

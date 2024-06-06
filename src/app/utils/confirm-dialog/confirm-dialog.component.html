@@ -1,0 +1,6 @@
+<h1 class="confirm-dialog text-center ">Confirmação</h1>
+<div mat-dialog-content class="text-center">{{ data }}</div>
+<div mat-dialog-actions class="flex-container  button-row">
+  <button mat-button color="primary" [mat-dialog-close]="false">Não</button>
+  <button mat-button color="warn"    [mat-dialog-close]="true" cdkFocusInitial>Sim</button>
+</div>

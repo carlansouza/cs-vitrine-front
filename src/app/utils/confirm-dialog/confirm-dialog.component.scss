@@ -1,0 +1,30 @@
+/* confirm-dialog.component.scss */
+
+h1 {
+  padding: 10px;
+}
+
+button {
+  border-radius: 5px;
+}
+
+
+section {
+  display: table;
+}
+
+
+.button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+

@@ -43,7 +43,6 @@ export class AuthService {
   getUserRole(): string | null {
     const decodedToken = this.getDecodedToken();
     return decodedToken ? decodedToken.role : null;
-
   }
 
   isLoggedIn(): boolean {
@@ -54,11 +53,8 @@ export class AuthService {
     this.loggedIn = true;
   }
 
-  logout(): void {
+  isLogout(): void {
     this.loggedIn = false;
     localStorage.removeItem('token');
   }
-
-
-
 }

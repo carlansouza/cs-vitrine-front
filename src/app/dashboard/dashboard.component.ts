@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
 import { Car, CarCadastro } from 'src/app/models/car.model';
+import { AuthService } from '../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,15 +29,19 @@ export class DashboardComponent {
 
   defaultImage = 'assets/carro-produção.jpg';
 
+   token$ = this.authService.getDecodedToken();
+  headers = new HttpHeaders().set('Authorization', `Bearer ${this.token$.token}`);
+
   constructor(
     private carService: CarService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
     this.carService.obterCarros().subscribe((carros) => {
       this.carros$ = carros;
-      console.log(this.carros$);
     });
 
   }
@@ -44,9 +50,30 @@ export class DashboardComponent {
     return this.httpClient.post<Car>(this.url, car);
   }
 
+
   deletarCarro(id: number) {
-    this.carService.deletarCarro(id).subscribe(_ => this.obterCarros());
-    window.location.reload();
+    this.httpClient.delete(`${this.url}/${id}`, { headers: this.headers }).subscribe(
+      response => {
+        console.log('Carro deletado com sucesso!', response);
+        const snackBarRef = this.snackBar.open('Carro deletado com sucesso!', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+        this.obterCarros();
+        snackBarRef.afterDismissed().subscribe(() => {
+          window.location.reload(); // Recarrega a página após o snackbar ser fechado
+        });
+      },
+      error => {
+        console.error('Erro ao deletar o carro', error);
+        this.snackBar.open('Erro ao deletar o carro. Por favor, tente novamente.', 'Fechar', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+      }
+    );
   }
 
   atualizarCarro(car: Car) {
@@ -58,9 +85,18 @@ export class DashboardComponent {
   }
 
   buttonClick(){
-    if (!this.carro.name || !this.carro.brand || !this.carro.model ||
-        !this.carro.price) {
-      alert('Preencha os campos' + (this.carro.name ? '' : ' Nome,') + (this.carro.brand ? '' : ' Narca,') + (this.carro.model ? '' : ' Modelo,') + (this.carro.price ? '' : ' e Preço') + ' corretamente!');
+    if (!this.carro.name || !this.carro.brand || !this.carro.model || !this.carro.price) {
+      let missingFields = [];
+      if (!this.carro.name) missingFields.push('Nome');
+      if (!this.carro.brand) missingFields.push('Marca');
+      if (!this.carro.model) missingFields.push('Modelo');
+      if (!this.carro.price) missingFields.push('Preço');
+
+      this.snackBar.open(`Preencha os campos: ${missingFields.join(', ')} corretamente!`, 'Fechar', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+      });
       return;
     }
 

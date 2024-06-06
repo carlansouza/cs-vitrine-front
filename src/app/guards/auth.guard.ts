@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const expectedRole = next.data['role'] as string;
     const userRole = this.authService.getUserRole();
-    console.log('userRole: ', userRole);
 
     if (userRole === expectedRole) {
       return true;
