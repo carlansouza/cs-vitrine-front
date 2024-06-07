@@ -18,7 +18,7 @@
 
 | User: admin@admin.com | Password: admin | Tipo: Admin |
 |-----------------------|------------------|-------------|
-| User: user@example.com | Password: password1| Tipo: User |
+
 
 ### Tecnologias utilizadas no Frontend
 - Angular 
