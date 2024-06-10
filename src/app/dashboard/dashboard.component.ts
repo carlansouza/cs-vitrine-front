@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Car, CarCadastro } from 'src/app/models/car.model';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +37,8 @@ export class DashboardComponent {
     private carService: CarService,
     private httpClient: HttpClient,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -114,7 +116,7 @@ export class DashboardComponent {
     }
 
     this.carService.cadastrarCarro(this.carro).subscribe(_ => this.obterCarros());
-    window.location.reload();
+    this.resetComponent();
   }
 
   atualizarId(){
@@ -135,6 +137,13 @@ export class DashboardComponent {
       image: '',
       d_alt: ''
     };
+  }
+
+  resetComponent() {
+    this.router.navigateByUrl('/dashboard', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/dashboard']);
+    }
+    );
   }
 
 }

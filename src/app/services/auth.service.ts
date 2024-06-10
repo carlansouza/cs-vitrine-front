@@ -16,12 +16,18 @@ export class AuthService {
 
   isLoggedIn$ = this.loggedIn.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const token = this.getToken();
+    if (token) {
+      this.loggedIn.next(true);
+    }
+  }
 
   login(credentials: { email: string, password: string }): Observable<any> {
     return this.http.post<any>(this.url + '/login', credentials).pipe(
       tap((response: any) => {
         if (response && response.token) {
+          this.setToken(response.token);
           this.loggedIn.next(true);
         }
       })

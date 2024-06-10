@@ -14,16 +14,11 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {
   }
 
-  singIn(user: UserLogin) {
-    return this.httpClient.post<UserLogin>(this.url, user);
-  }
-
-  createUser(user: UserCreate) {
-    return this.httpClient.post<UserCreate>(this.url, user);
-  }
-
   getRole() {
     return localStorage.getItem('role');
   }
 
+  updatePassword(user: UserLogin) {
+    return this.httpClient.put<UserLogin>(this.url + '/alter/password', user);
+  }
 }
