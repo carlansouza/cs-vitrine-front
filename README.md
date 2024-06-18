@@ -30,7 +30,11 @@
 Dentro do diretório, execute os seguintes comandos:
 ```bash
 npm install
-npm ng s -o
+npm run start 
+```
+ > ou 
+```bash
+ng serve -o
 ```
 ### Observações:
 - O frontend está rodando na porta 4200.
